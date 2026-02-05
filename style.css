@@ -1,0 +1,319 @@
+:root {
+    --bg-color: #0f1115;
+    --card-bg: #161b22;
+    --card-hover: #1f242c;
+    --text-primary: #f0f6fc;
+    --text-secondary: #8b949e;
+    --accent-color: #58a6ff;
+    --accent-glow: rgba(88, 166, 255, 0.2);
+    --success-color: #238636;
+    --border-color: #30363d;
+    --danger-color: #da3633;
+    --font-main: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.app-container {
+    max-width: 1000px;
+    /* Slightly narrower for list view */
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: -1px;
+}
+
+.accent {
+    background: linear-gradient(135deg, var(--accent-color), #bc8cff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Global Progress */
+.global-progress-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.progress-bar-bg {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-bg.global {
+    height: 14px;
+    border-radius: 7px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-color), #bc8cff);
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.stats-row {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Weeks List */
+.weeks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.week-module {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.week-module:hover {
+    border-color: var(--text-secondary);
+}
+
+.week-header {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    background: transparent;
+    transition: background 0.2s;
+}
+
+.week-header:hover {
+    background: var(--card-hover);
+}
+
+.week-info h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.week-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.week-meta {
+    text-align: right;
+    min-width: 120px;
+}
+
+.week-percent {
+    display: block;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.3rem;
+}
+
+.week-progress-mini {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.week-mini-fill {
+    height: 100%;
+    background: var(--accent-color);
+    width: 0%;
+    transition: width 0.3s;
+}
+
+/* Accordion Content */
+.week-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.week-content.expanded {
+    max-height: 1000px;
+    /* Arbitrary large number for animation */
+    transition: max-height 0.5s cubic-bezier(1, 0, 1, 0);
+    /* Ideally uses JS to set specific height, but this works for pure CSS roughly */
+    border-top: 1px solid var(--border-color);
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+/* Topic Card */
+.topic-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.topic-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.topic-card.completed {
+    border-color: var(--success-color);
+    background: rgba(35, 134, 54, 0.05);
+}
+
+.topic-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--text-secondary);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topic-card.completed .topic-check {
+    background: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.topic-check svg {
+    width: 12px;
+    height: 12px;
+    fill: white;
+    display: none;
+}
+
+.topic-card.completed .topic-check svg {
+    display: block;
+}
+
+.topic-text h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.topic-text p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.3;
+}
+
+/* Utility */
+.danger-btn {
+    background: transparent;
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-top: 2rem;
+}
+
+.danger-btn:hover {
+    background: var(--danger-color);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .week-header {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .week-meta {
+        text-align: left;
+    }
+
+    .topics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Locked State */
+.week-module.locked {
+    opacity: 0.5;
+    filter: grayscale(0.8);
+    pointer-events: none;
+    /* Prevents clicking */
+    position: relative;
+    border-style: dashed;
+}
+
+.week-module.locked .week-header {
+    cursor: not-allowed;
+}
+
+/* Optional: Lock Icon Indicator */
+.lock-icon {
+    display: none;
+    width: 20px;
+    height: 20px;
+    fill: var(--text-secondary);
+    margin-right: 0.5rem;
+}
+
+.week-module.locked .lock-icon {
+    display: inline-block;
+}
+
+.week-module.locked .week-progress-mini {
+    display: none;
+}
